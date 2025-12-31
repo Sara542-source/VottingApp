@@ -23,6 +23,9 @@ class VoteServiceTest {
     private VoteRepository repository; // Crée un faux repository
 
     @Mock
+    private CountingStrategy strategy; // creer une fausse strategy
+
+    @Mock
     private VoteListener listener; // Crée un faux listener
 
     @InjectMocks
@@ -66,14 +69,13 @@ class VoteServiceTest {
     @Test
     void testCountVotes() {
         // Arrange
-        CountingStrategy strategy = mock(CountingStrategy.class);
         List<Vote> fakeVotes = List.of(new Vote("a", "b", 1L));
 
         when(repository.findAll()).thenReturn(fakeVotes);
         when(strategy.count(fakeVotes)).thenReturn(Map.of("b", 1));
 
         // Act
-        Map<String, Integer> result = service.countVotes(strategy);
+        Map<String, Integer> result = service.countVotes();
 
         // Assert
         assertEquals(1, result.get("b"));

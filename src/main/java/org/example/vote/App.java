@@ -22,11 +22,10 @@ public class App {
         String repoType = sc.nextLine().trim();
 
         VoteRepository repository = RepositoryFactory.createRepo(repoType);
-        VoteService service = new VoteService(repository);
+        CountingStrategy strategy = new PluralityCountingStrategy();
+        VoteService service = new VoteService(repository,strategy);
         service.addListener(new LoggingVoteListener());
         service.addListener(new AuditVoteListener("data/audit.txt"));
-
-        CountingStrategy strategy = new PluralityCountingStrategy();
 
         System.out.println("Bienvenue dans VotingApp !");
         System.out.println("Commandes : vote / count / reset / exit");
@@ -43,7 +42,7 @@ public class App {
                     service.castVote(vote);
                 }
                 case "count" -> {
-                    Map<String, Integer> results = service.countVotes(strategy);
+                    Map<String, Integer> results = service.countVotes();
                     System.out.println("Résultats : " + results);
                 }
                 case "reset" -> {

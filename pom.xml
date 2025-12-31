@@ -16,11 +16,13 @@
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.host.url>${env.SONAR_HOST_URL}</sonar.host.url>
+    <sonar.login>${env.SONAR_TOKEN}</sonar.login>
+    <sonar.projectKey>Sara542-source_VottingApp</sonar.projectKey>
   </properties>
 
   <build>
     <plugins>
-      <!-- Plugin de compilation Maven -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -60,7 +62,7 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
+    <!--<dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
       <version>5.5.0</version>
@@ -72,7 +74,7 @@
       <artifactId>mockito-junit-jupiter</artifactId>
       <version>5.5.0</version>
       <scope>test</scope>
-    </dependency>
+    </dependency> -->
 
     <dependency>
       <groupId>org.mockito</groupId>
