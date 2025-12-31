@@ -14,9 +14,18 @@ public class VoteService {
 
     private final VoteRepository repository;
     private final List<VoteListener> listeners = new ArrayList<>();
+    private CountingStrategy countingStrategy;
 
-    public VoteService(VoteRepository repository) {
+    public VoteService(VoteRepository repository,CountingStrategy countingStrategy) {
         this.repository = repository;
+        this.countingStrategy=countingStrategy;
+    }
+
+    public void setCountingStrategy(CountingStrategy countingStrategy) {
+        this.countingStrategy = countingStrategy;
+    }
+    public CountingStrategy getCountingStrategy() {
+        return countingStrategy;
     }
 
     // Ajouter un observateur
@@ -52,8 +61,8 @@ public class VoteService {
 
 
     // Compter les votes selon la stratégie choisie
-    public Map<String, Integer> countVotes(CountingStrategy strategy) {
-        return strategy.count(repository.findAll()); // Strategy pattern
+    public Map<String, Integer> countVotes() {
+        return countingStrategy.count(repository.findAll()); // Strategy pattern
     }
 
     // Réinitialiser tous les votes
