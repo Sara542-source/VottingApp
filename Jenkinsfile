@@ -7,7 +7,7 @@ pipeline {
   }
   
   environment {
-    MAVEN_OPTS = '-Xmx1024m -XX:MaxPermSize=256m'
+    MAVEN_OPTS = '-Xmx1024m'
   }
   
   stages {
